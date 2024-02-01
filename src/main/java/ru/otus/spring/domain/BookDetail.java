@@ -6,19 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Author {
+public class BookDetail {
 
     private Long id;
 
-    private String firstName;
+    private String title;
 
-    private String lastName;
+    private Author author;
 
-    private LocalDate birthDate;
+    private Genre genre;
+
+    private LocalDate publishedAt;
 }

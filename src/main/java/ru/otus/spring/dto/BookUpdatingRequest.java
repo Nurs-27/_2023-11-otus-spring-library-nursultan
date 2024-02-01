@@ -5,14 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorDto {
+public class BookUpdatingRequest {
     private Long id;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDate;
+    private String title;
+    private Long authorId;
+    private Long genreId;
+    private LocalDate publishedAt;
 }
+
+
+

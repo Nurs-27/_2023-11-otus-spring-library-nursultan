@@ -3,8 +3,6 @@ package ru.otus.spring.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.spring.domain.Author;
-import ru.otus.spring.domain.Genre;
 
 import java.time.LocalDate;
 
@@ -14,9 +12,7 @@ import java.time.LocalDate;
 public class BookDto {
     private Long id;
     private String title;
-    private AuthorDto authordto;
+    private AuthorDto authorDto;
     private GenreDto genreDto;
     private LocalDate publishedAt;
 }
-
-

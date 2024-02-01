@@ -1,34 +1,17 @@
 package ru.otus.spring.domain;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.List;
-
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "genre")
-@Entity(name = "Genre")
-public class Genre extends AbstractJpaPersistable<Long> {
+public class Genre {
 
-    @Column(name = "name", nullable = false, unique = true)
+    private Long id;
+
     private String name;
-
-    @OneToMany(
-            targetEntity = Book.class,
-            cascade = { CascadeType.PERSIST },
-            fetch = FetchType.LAZY,
-            mappedBy = "genre"
-    )
-    private List<Book> books;
 }
