@@ -76,25 +76,25 @@ public class Mapper {
         return dto;
     }
 
-    public Comment toCommentEntity(CommentDto dto) {
+    public Comment toCommentEntity(CommentDto dto, Book book) {
         if (dto == null) {
             return null;
         }
         Comment entity = new Comment();
         entity.setText(dto.getText());
-        entity.setBook(toBookEntity(dto.getBookDto()));
+        entity.setBook(book);
         entity.setCreated_by(dto.getCreatedBy());
         return entity;
     }
 
-    public CommentDto toCommentDto(Comment comment) {
+    public CommentDto toCommentDto(Comment comment, Long bookId) {
         if (comment == null) {
             return null;
         }
         CommentDto dto = new CommentDto();
         dto.setId(comment.getId());
         dto.setText(comment.getText());
-        dto.setBookDto(toBookDto(comment.getBook()));
+        dto.setBookId(bookId);
         dto.setCreatedBy(comment.getCreated_by());
         return dto;
     }

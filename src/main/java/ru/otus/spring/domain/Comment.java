@@ -24,11 +24,6 @@ import java.time.LocalDateTime;
 @ToString
 @Table(name = "comment")
 @Entity(name = "Comment")
-@NamedEntityGraph(name = "comment-book-entity-graph",
-        attributeNodes = {
-                @NamedAttributeNode("book"),
-        }
-)
 public class Comment extends AbstractJpaPersistable<Long> {
 
     @Column(name = "text", nullable = false)

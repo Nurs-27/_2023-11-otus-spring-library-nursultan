@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 public class CommentDto {
     private Long id;
     private String text;
-    private BookDto bookDto;
-    private GenreDto genreDto;
+    private Long bookId;
     private String createdBy;
 }
 
