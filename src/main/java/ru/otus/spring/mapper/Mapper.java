@@ -3,9 +3,11 @@ package ru.otus.spring.mapper;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
+import ru.otus.spring.domain.Comment;
 import ru.otus.spring.domain.Genre;
 import ru.otus.spring.dto.AuthorDto;
 import ru.otus.spring.dto.BookDto;
+import ru.otus.spring.dto.CommentDto;
 import ru.otus.spring.dto.GenreDto;
 
 @Component
@@ -42,7 +44,6 @@ public class Mapper {
         return entity;
     }
 
-
     public AuthorDto toAuthorDto(Author author) {
         if (author == null) {
             return null;
@@ -54,7 +55,6 @@ public class Mapper {
         dto.setBirthDate(author.getBirthDate());
         return dto;
     }
-
 
     public Genre toGenreEntity(GenreDto dto) {
         if (dto == null) {
@@ -73,6 +73,29 @@ public class Mapper {
         GenreDto dto = new GenreDto();
         dto.setId(genre.getId());
         dto.setName(genre.getName());
+        return dto;
+    }
+
+    public Comment toCommentEntity(CommentDto dto) {
+        if (dto == null) {
+            return null;
+        }
+        Comment entity = new Comment();
+        entity.setText(dto.getText());
+        entity.setBook(toBookEntity(dto.getBookDto()));
+        entity.setCreated_by(dto.getCreatedBy());
+        return entity;
+    }
+
+    public CommentDto toCommentDto(Comment comment) {
+        if (comment == null) {
+            return null;
+        }
+        CommentDto dto = new CommentDto();
+        dto.setId(comment.getId());
+        dto.setText(comment.getText());
+        dto.setBookDto(toBookDto(comment.getBook()));
+        dto.setCreatedBy(comment.getCreated_by());
         return dto;
     }
 }

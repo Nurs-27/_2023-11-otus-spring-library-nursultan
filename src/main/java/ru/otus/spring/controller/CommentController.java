@@ -7,39 +7,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.dto.BookDto;
+import ru.otus.spring.dto.CommentDto;
 import ru.otus.spring.service.BookService;
+import ru.otus.spring.service.CommentService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/v1/book")
+@RequestMapping(value = "/v1/comments")
 @RequiredArgsConstructor
-public class BookController {
+public class CommentController {
 
-    private final BookService bookService;
+    private final CommentService service;
 
     @PostMapping
-    public BookDto save(@RequestBody BookDto dto) {
-        return bookService.save(dto);
+    public CommentDto save(@RequestBody CommentDto dto) {
+        return service.save(dto);
     }
 
-    @GetMapping("{id}")
-    public BookDto findById(@PathVariable Long id) {
-        final var result = bookService.findById(id);
-
-        return result;
-    }
-
-    @GetMapping("/all")
-    public List<BookDto> findAll() {
-        return bookService.findAll();
+    @GetMapping
+    public List<CommentDto> findAll(@RequestParam("bookId") Long bookId) {
+        return service.findByBookId(bookId);
     }
 
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Long id) {
-        bookService.deleteById(id);
+        service.deleteById(id);
     }
 }

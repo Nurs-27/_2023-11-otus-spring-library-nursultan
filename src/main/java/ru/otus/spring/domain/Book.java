@@ -29,7 +29,8 @@ import java.time.LocalDate;
                 @NamedAttributeNode("author"),
                 @NamedAttributeNode("genre")
         }
-)public class Book extends AbstractJpaPersistable<Long> {
+)
+public class Book extends AbstractJpaPersistable<Long> {
 
     @Column(name = "title", nullable = false)
     private String title;
