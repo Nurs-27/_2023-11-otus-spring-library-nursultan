@@ -18,6 +18,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository repository;
     private final Mapper mapper;
 
+    @Override
     @Transactional
     public BookDto save(BookDto dto) {
         log.info("Starting saving book: {}", dto);
@@ -27,6 +28,7 @@ public class BookServiceImpl implements BookService {
         return mapper.toBookDto(book);
     }
 
+    @Override
     public BookDto findById(Long id) {
         log.info("Starting finding book by id: {}", id);
         final var book = repository.findById(id).orElseThrow();
@@ -35,6 +37,7 @@ public class BookServiceImpl implements BookService {
         return mapper.toBookDto(book);
     }
 
+    @Override
     public List<BookDto> findAll() {
         log.info("Starting getting all books");
         final var bookDtos = repository.findAll()
@@ -46,7 +49,7 @@ public class BookServiceImpl implements BookService {
         return bookDtos;
     }
 
-    @Transactional
+    @Override
     public void deleteById(Long id) {
         log.info("Starting deleting book by id: {}", id);
         repository.deleteById(id);

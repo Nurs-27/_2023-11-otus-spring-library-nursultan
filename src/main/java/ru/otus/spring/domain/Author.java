@@ -28,7 +28,6 @@ public class Author extends AbstractJpaPersistable<Long> {
 
     private LocalDateTime birthDate;
 
-    @JsonManagedReference
     @OneToMany(
             targetEntity = Book.class,
             cascade = CascadeType.PERSIST,

@@ -1,6 +1,6 @@
 package ru.otus.spring.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,15 +44,21 @@ public class Book extends AbstractJpaPersistable<Long> {
      * a database one-to-many database association, and, usually, the most efficient alternative too.
      * The best way to map a @OneToMany association is to rely on the @ManyToOne side to propagate all entity state changes:
      */
-    @JsonBackReference
     @ManyToOne(targetEntity = Author.class, fetch = FetchType.LAZY)
     @JoinColumn
     private Author author;
 
-    @JsonBackReference
     @ManyToOne(targetEntity = Genre.class, fetch = FetchType.LAZY)
     @JoinColumn
     private Genre genre;
+
+    @OneToMany(
+            targetEntity = Comment.class,
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY,
+            mappedBy = "book"
+    )
+    private List<Comment> comments;
 
     @Column(name = "published_at", nullable = false)
     private LocalDate publishedAt;

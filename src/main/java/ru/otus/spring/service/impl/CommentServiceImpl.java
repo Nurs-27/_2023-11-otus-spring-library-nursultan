@@ -23,6 +23,7 @@ public class CommentServiceImpl implements CommentService {
     private final BookRepository bookRepository;
     private final Mapper mapper;
 
+    @Override
     @Transactional
     public CommentDto save(CommentDto dto) {
         log.info("Starting saving comment: {}", dto);
@@ -33,17 +34,16 @@ public class CommentServiceImpl implements CommentService {
         return mapper.toCommentDto(comment, book.getId());
     }
 
+    @Override
     public List<CommentDto> findByBookId(Long bookId) {
         log.info("Starting finding comments by bookId: {}", bookId);
-        // Загружаем книгу отдельным запросом в Persistence Context
-        // Джойнить книгу ко всем комментам избыточная история, т.к приделать к ,условно, 1000 комментариям информацию об одной конкретной книге - избыточно, особенно в плане дублей
         final var book = bookRepository.findById(bookId).orElse(null);
         if (book == null) {
             log.info("No book found for the ID: {}", bookId);
             return Collections.emptyList();
         }
-        final var commentDtos = repository.findByBook(book)
-                .stream()
+
+        final var commentDtos = book.getComments().stream()
                 .map(comment -> mapper.toCommentDto(comment, bookId))
                 .collect(Collectors.toList());
 
@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService {
         return commentDtos;
     }
 
-    @Transactional
+    @Override
     public void deleteById(Long id) {
         log.info("Starting deleting a comment by id: {}", id);
         repository.deleteById(id);

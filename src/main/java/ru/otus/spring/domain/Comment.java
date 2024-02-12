@@ -1,13 +1,10 @@
 package ru.otus.spring.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedAttributeNode;
-import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +26,6 @@ public class Comment extends AbstractJpaPersistable<Long> {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @JsonBackReference
     @ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
     @JoinColumn
     private Book book;
